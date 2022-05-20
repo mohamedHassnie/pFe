@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "5000:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - webservices
+  webservices:
+    build: .
+    ports:
+      - "3017:3017"
+    environment:
+      - PORT=3017
+      - USER=test
+      - PASSWORD=test
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    depends_on:
+      - mongo_app
+
+  mongo_app:
+    image: mongo
+    ports:
+      - "27020:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+    volumes:
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:
