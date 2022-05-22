@@ -12,9 +12,9 @@ services:
   webservices:
     build: .
     ports:
-      - "3017:3017"
+      - "3000:3000"
     environment:
-      - PORT=3017
+      - PORT=3000
       - USER=test
       - PASSWORD=test
     volumes:
@@ -24,12 +24,9 @@ services:
       - mongo_app
 
   mongo_app:
-    image: mongo
+    image: mongo:latest
     ports:
       - "27020:27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=test
-      - MONGO_INITDB_ROOT_PASSWORD=test
     volumes:
       - mongo-db:/data/db
 

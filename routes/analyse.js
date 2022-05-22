@@ -192,7 +192,6 @@ const treatFile = async (file) => {
     let user = await User.findOne({ Barcode });
     if (user) {
       console.log("user deja existe");
-      console.log("vcf en cours de stockage");
     } else {
       await User.create({
         Barcode,
@@ -214,6 +213,13 @@ const treatFile = async (file) => {
       });
     }
     return new Promise((resolve, reject) => {
+      /*
+ const rl = readline.createInterface({
+      input: fs.createReadStream('broadband.sql'),
+      crlfDelay: Infinity
+    });
+
+      */
       rl = readline(FILE_CHROMO_USER_PATH);
       let normalizedCase = {
         CASENS: [],

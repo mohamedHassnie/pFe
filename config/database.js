@@ -1,14 +1,20 @@
 const mongoose = require("mongoose");
-const URI = `mongodb://test:test@mongo_app:27020/PLateformemedicaLe`;
-const connectDB = () => {
-  try {
-    mongoose.connect(URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log(`MongoDB connecté`);
-  } catch (error) {
-    console.log(`MongoDB error when connecting: ${error}`);
+const MONGO_URL = "mongodb://mongo_app/medicale";
+
+class Database {
+  constructor() {
+    this._connect();
   }
-};
-connectDB();
+  _connect() {
+    mongoose
+      .connect(MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(console.log("database connected succefully"))
+      .catch((e) => {
+        console.log("unable to connect to the datbase , error :", e);
+      });
+  }
+}
+module.exports = new Database();

@@ -13,7 +13,7 @@ const authAmin = require("./routes/admin");
 const pingRoutes = require("./routes/ping");
 flash = require("express-flash");
 require("dotenv").config();
-const PORT = process.env.PORT; //port devient 3017
+const PORT = process.env.PORT; //port devient 3000
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 // stocker information dans bd a travers un id et dans le cookies ( navigateur)
