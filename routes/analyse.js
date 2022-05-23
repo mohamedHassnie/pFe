@@ -214,7 +214,7 @@ const treatFile = async (file) => {
     }
     return new Promise((resolve, reject) => {
       /*
- const rl = readline.createInterface({
+     const rl = readline.createInterface({
       input: fs.createReadStream('broadband.sql'),
       crlfDelay: Infinity
     });

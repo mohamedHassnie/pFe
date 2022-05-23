@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --max-old-space-size=64000 app.js"
+    "start": "nodemon --max-old-space-size=64000 app.js",
+    "refresh": "docker-compose down && docker-compose up -d",
+    "clean": "docker volume prune -f && docker image prune -f",
+    "check": "docker ps -a",
+    "log": "docker logs user-variationgenetique-webservices-1"
   },
   "author": "",
   "license": "ISC",
