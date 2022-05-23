@@ -230,6 +230,7 @@ const treatFile = async (file) => {
         const CASE00 = "0/0:[1-14]*";
         const CASE01 = "0/1:[1-14]*";
         const CASE11 = "1/1:[1-14]*";
+        const CASE12 = "./.:[1-14]*";
         if (line.split("\t")[0][0] !== "#") {
           let qualityScore = line.split("\t")[9];
           if (qualityScore.match(CASE00)) {
@@ -256,7 +257,15 @@ const treatFile = async (file) => {
               GénoType: line.split("\t")[4] + " | " + line.split("\t")[4],
               type: "11",
             });
-          } else {
+          } else if (qualityScore.match(CASE12))
+            await AnalyseGenetique.create({
+              Barcode: user._id,
+              ID: line.split("\t")[2],
+              POS: line.split("\t")[1],
+              GénoType: line.split("\t")[4] + " | " + line.split("\t")[4],
+              type: "information invalid",
+            });
+          else {
             normalizedCase.CASENS.push({
               POS: line.split("\t")[1],
             });
@@ -345,6 +354,7 @@ router.post("/analyse", async (req, res, next) => {
     return res.json({ message: responses });
   } catch (error) {
     next(error);
+    throw error;
   }
 });
 /*
