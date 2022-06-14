@@ -2,8 +2,13 @@ const mongoose = require("mongoose");
 
 Markiting = mongoose.Schema({
   Date: { type: Date, default: Date.now() },
+  fileName: {
+    type: "String",
+    required: false,
+  },
   UserName: { type: String, required: true },
   LastName: { type: String, required: true },
+
   role: {
     type: String,
     required: false,
